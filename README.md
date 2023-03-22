@@ -20,16 +20,16 @@
 * Анимация
 * JavaScript
 * React
-* JSX 
+* JSX
  
 ## Инструкция по использованию проекта.  
 В проекте исопльзуется язык HTML версии 5.3 в сочетании со стилевыми файлами CSS версии 3.
 
 Инструкция по установке:
-* git clone https://github.com/Argayash1/mesto-react.git
-* cd mesto-react
-* npm install
-* npm start
+* `git clone https://github.com/Argayash1/mesto-react.git`
+* `cd mesto-react`
+* `npm install`
+* `npm start`
 
 
 ## Ссылка на макет проекта
