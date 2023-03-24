@@ -2,6 +2,7 @@ import useValidation from "../hooks/useValidation.js";
 
 function Register({ name }) {
   const { values, errors, formValid, onChange, resetValidation } = useValidation();
+  const submitButtonDisable = formValid && true;
 
   return (
     <div className="register">
@@ -32,7 +33,7 @@ function Register({ name }) {
           required
         />
         <span className="register__error">{errors.password}</span>
-        <button className="register__submit-button" type="submit">
+        <button className="register__submit-button" type="submit" disabled={submitButtonDisable}>
           Зарегистрироваться
         </button>
       </form>

@@ -2,6 +2,7 @@ import useValidation from "../hooks/useValidation.js";
 
 function Login({ name }) {
   const { values, errors, formValid, onChange, resetValidation } = useValidation();
+  const submitButtonDisable = formValid && true;
 
   return (
     <div className="login">
@@ -32,7 +33,7 @@ function Login({ name }) {
           required
         />
         <span className="login__error">{errors.password}</span>
-        <button className="login__submit-button" type="submit">
+        <button className="login__submit-button" type="submit" disabled={submitButtonDisable}>
           Войти
         </button>
       </form>
