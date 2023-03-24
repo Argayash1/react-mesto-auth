@@ -174,23 +174,12 @@ function App() {
           <Routes>
             <Route path="/sign-up" element={<Register />} />
             <Route path="/sign-in" element={<Login />} />
-            <Route path="/" element={<ProtectedRouteElement
-              element={Main}
-              loggedIn={loggedIn}
-              
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleDeleteCardClick}
-              cards={cards}
-            />} />
-
-            {/* <Route
+            <Route
               path="/"
               element={
-                <Main
+                <ProtectedRouteElement
+                  element={Main}
+                  loggedIn={loggedIn}
                   onEditProfile={handleEditProfileClick}
                   onAddPlace={handleAddPlaceClick}
                   onEditAvatar={handleEditAvatarClick}
@@ -200,10 +189,8 @@ function App() {
                   cards={cards}
                 />
               }
-            /> */}
+            />
           </Routes>
-          {/*
-           */}
           <Footer />
 
           <EditProfilePopup

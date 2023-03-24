@@ -1,7 +1,7 @@
 import useValidation from "../hooks/useValidation.js";
 
 function Login({ name }) {
-  const { values, errors, formValid, onChange, resetValidation } = useValidation();
+  const { values, errors, formValid, onChange } = useValidation();
   const submitButtonDisable = formValid && true;
 
   return (

@@ -1,13 +1,24 @@
+import { Link, useNavigate } from "react-router-dom";
+import * as auth from "../utils/auth.js";
 import useValidation from "../hooks/useValidation.js";
 
-function Register({ name }) {
-  const { values, errors, formValid, onChange, resetValidation } = useValidation();
-  const submitButtonDisable = formValid && true;
+const Register = ({ name }) => {
+  const navigate = useNavigate();
+  const { values, errors, formValid, onChange } = useValidation();
+  const submitButtonDisable = formValid && false;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { password, email } = values;
+    auth.register(password, email).then((res) => {
+      navigate("/sign-in", { replace: true });
+    });
+  };
 
   return (
     <div className="register">
       <h2 className="register__title">Регистрация</h2>
-      <form className="register__form" name={`${name}`} noValidate>
+      <form className="register__form" name={`${name}`} onSubmit={handleSubmit} noValidate>
         <input
           type="email"
           value={values.email || ""}
@@ -37,14 +48,14 @@ function Register({ name }) {
           Зарегистрироваться
         </button>
       </form>
-      <p className="register__registered">
-        Уже зарегистрированы?{" "}
-        <a href="#" className="register__sign-in">
+      <div className="register__signin">
+        <p>Уже зарегистрированы?</p>
+        <Link to="/sign-in" className="register__signin-link">
           Войти
-        </a>
-      </p>
+        </Link>
+      </div>
     </div>
   );
-}
+};
 
 export default Register;
