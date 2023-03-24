@@ -1,13 +1,33 @@
+import { useNavigate } from "react-router-dom";
+import * as auth from "../utils/auth.js";
 import useValidation from "../hooks/useValidation.js";
 
-function Login({ name }) {
-  const { values, errors, formValid, onChange } = useValidation();
-  const submitButtonDisable = formValid && true;
+function Login({ name, handleLogin }) {
+  const navigate = useNavigate();
+  const { values, errors, formValid, onChange, resetValidation } = useValidation();
+  const submitButtonDisable = formValid && false;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!values.email || !values.password) {
+      return;
+    }
+    auth
+      .authorize(values.password, values.email)
+      .then((data) => {
+        if (data.token) {
+          resetValidation();
+          handleLogin(e);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="login">
       <h2 className="login___title">Вход</h2>
-      <form name={`${name}`} className="login__form" noValidate>
+      <form name={`${name}`} className="login__form" onSubmit={handleSubmit} noValidate>
         <input
           type="email"
           value={values.email || ""}
@@ -29,7 +49,7 @@ function Login({ name }) {
           id="password"
           placeholder="Пароль"
           autoComplete="off"
-          minlength="8"
+          minLength="8"
           required
         />
         <span className="login__error">{errors.password}</span>

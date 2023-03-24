@@ -45,6 +45,11 @@ function App() {
       });
   }, []);
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoggedIn(true);
+  };
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -173,7 +178,7 @@ function App() {
           <Header loggedIn={loggedIn} />
           <Routes>
             <Route path="/sign-up" element={<Register />} />
-            <Route path="/sign-in" element={<Login />} />
+            <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
             <Route
               path="/"
               element={

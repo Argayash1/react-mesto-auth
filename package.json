@@ -1,6 +1,6 @@
 {
   "homepage": "https://argayash1.github.io/mesto-react/",
-  "name": "mesto-react",
+  "name": "react-mesto-auth",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
