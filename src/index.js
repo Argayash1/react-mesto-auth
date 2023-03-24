@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom"; // импортируем BrowserRouter
 import "./index.css";
 import App from "./components/App.js";

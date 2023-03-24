@@ -1,13 +1,16 @@
 .header {
-    max-width: 880px;
-    min-height: 74px;
-    margin: 0 auto;
-    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  max-width: 880px;
+  min-height: 74px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: flex;
+  justify-content: space-between;
+  font-family: "Inter", "Helvetica Neue", "Arial", sans-serif;
 }
 
 @media screen and (max-width: 968px) {
-    .header {
-        min-height: 55px;
-        max-width: 100%;
-    }
+  .header {
+    min-height: 55px;
+    max-width: 100%;
+  }
 }
