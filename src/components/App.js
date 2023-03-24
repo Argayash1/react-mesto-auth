@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom"; // импортируем Routes, Route и Navigate
 
-import ProtectedRoute from "../components/ProtectedRoute.js"; // импортируем HOC
+import ProtectedRouteElement from "../components/ProtectedRoute.js"; // импортируем HOC
 import Register from "../components/Register.js";
 import Login from "../components/Login.js";
 
@@ -174,7 +174,20 @@ function App() {
           <Routes>
             <Route path="/sign-up" element={<Register />} />
             <Route path="/sign-in" element={<Login />} />
-            <Route
+            <Route path="/" element={<ProtectedRouteElement
+              element={Main}
+              loggedIn={loggedIn}
+              
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleDeleteCardClick}
+              cards={cards}
+            />} />
+
+            {/* <Route
               path="/"
               element={
                 <Main
@@ -187,23 +200,11 @@ function App() {
                   cards={cards}
                 />
               }
-            />
+            /> */}
           </Routes>
-          {/* 
-            <ProtectedRoute
-              path="/"
-              loggedIn={loggedIn}
-              element={Main}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleDeleteCardClick}
-              cards={cards}
-            />
-            <Footer />
-          </Routes> */}
+          {/*
+           */}
+          <Footer />
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
