@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom"; // импортируем Routes, Route и Navigate
+import { Routes, Route, useNavigate } from "react-router-dom"; // импортируем Routes, Route и Navigate
 
 import ProtectedRouteElement from "../components/ProtectedRoute.js"; // импортируем HOC
 import Register from "../components/Register.js";
@@ -15,6 +15,7 @@ import AddPlacePopup from "../components/AddPlacePopup.js";
 import ConfirmDeletePopup from "../components/ConfirmDeletePopup.js";
 import ImagePopup from "../components/ImagePopup.js";
 
+import * as auth from "../utils/auth.js";
 import api from "../utils/api.js";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
@@ -34,6 +35,8 @@ function App() {
   const [cardToDelete, setCardToDelete] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, cardsData]) => {
@@ -44,6 +47,26 @@ function App() {
         console.log(err); // выведем ошибку в консоль
       });
   }, []);
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  const tokenCheck = () => {
+    // если у пользователя есть токен в localStorage,
+    // эта функция проверит валидность токена
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      // проверим токен
+      auth.getContent(jwt).then((res) => {
+        if (res) {
+          // авторизуем пользователя
+          setLoggedIn(true);
+          navigate("/", { replace: true });
+        }
+      });
+    }
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();

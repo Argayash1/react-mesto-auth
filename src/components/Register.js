@@ -5,7 +5,7 @@ import useValidation from "../hooks/useValidation.js";
 const Register = ({ name }) => {
   const navigate = useNavigate();
   const { values, errors, formValid, onChange } = useValidation();
-  const submitButtonDisable = formValid && false;
+  const submitButtonDisable = !formValid && true;
 
   const handleSubmit = (e) => {
     e.preventDefault();
