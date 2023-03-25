@@ -2,13 +2,16 @@ import Popup from "../components/Popup.js";
 import success from "../images/InfoTooltip-success.svg";
 import fail from "../images/InfoTooltip-fail.svg";
 
-function InfoTooltip({ isOpen, onClose, name }) {
+function InfoTooltip({ isOpen, onClose, name, isSuccess }) {
+  const headerText = isSuccess ? "Вы успешно зарегистрировались" : "Что-то пошло не так! Попробуйте ещё раз";
+  const imageSrc = isSuccess ? success : fail;
+
   return (
     <Popup name={name} isOpen={isOpen} onClose={onClose}>
       <div className="popup__container">
         <button className="popup__close" type="button" onClick={onClose}></button>
-        <img className="popup__register-icon" />
-        <h3 className="popup__register-title"></h3>
+        <img className="popup__register-image" src={imageSrc} alt={headerText} />
+        <h3 className="popup__register-title">Вы успешно зарегистрировались</h3>
       </div>
     </Popup>
   );

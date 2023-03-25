@@ -13,6 +13,7 @@ import EditProfilePopup from "../components/EditProfilePopup.js";
 import EditAvatarPopup from "../components/EditAvatarPopup.js";
 import AddPlacePopup from "../components/AddPlacePopup.js";
 import ConfirmDeletePopup from "../components/ConfirmDeletePopup.js";
+import InfoTooltip from "./InfoTooltip.js";
 import ImagePopup from "../components/ImagePopup.js";
 
 import * as auth from "../utils/auth.js";
@@ -25,6 +26,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [isEditProfilePopupLoading, setIsEditProfilePopupLoading] = useState(false);
   const [isAddPlacePopupLoading, setIsAddPlacePopupLoading] = useState(false);
@@ -34,6 +36,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardToDelete, setCardToDelete] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
 
   const navigate = useNavigate();
 
@@ -72,6 +75,12 @@ function App() {
     e.preventDefault();
     setLoggedIn(true);
   };
+
+  function signOut() {
+    localStorage.removeItem("jwt");
+    navigate("sign-in", { replace: true });
+    setLoggedIn(false);
+  }
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -182,6 +191,10 @@ function App() {
     setCardToDelete(card);
   }
 
+  function handleRegisterClick() {
+    setIsInfoTooltipOpen(true);
+  }
+
   function handleCardClick({ name, link }) {
     setSelectedCard({ name, link });
   }
@@ -192,15 +205,16 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard({});
     setIsDeletePopupOpen(false);
+    setIsInfoTooltipOpen(false);
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          <Header loggedIn={loggedIn} />
+          <Header loggedIn={loggedIn} onSignOut={signOut} />
           <Routes>
-            <Route path="/sign-up" element={<Register />} />
+            <Route path="/sign-up" element={<Register onRegister={handleRegisterClick} />} />
             <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
             <Route
               path="/"
@@ -253,6 +267,8 @@ function App() {
             isLoading={isDeletePopupLoading}
             name="delete-card"
           />
+
+          <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} name="register" />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} name="image" />
         </div>

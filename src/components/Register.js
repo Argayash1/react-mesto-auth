@@ -2,16 +2,16 @@ import { Link, useNavigate } from "react-router-dom";
 import * as auth from "../utils/auth.js";
 import useValidation from "../hooks/useValidation.js";
 
-const Register = ({ name }) => {
+const Register = ({ name, onRegister }) => {
   const navigate = useNavigate();
-  const { values, errors, formValid, onChange } = useValidation();
-  const submitButtonDisable = !formValid && true;
+  const { values, errors, onChange } = useValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { password, email } = values;
     auth.register(password, email).then((res) => {
       navigate("/sign-in", { replace: true });
+      onRegister();
     });
   };
 
@@ -44,7 +44,7 @@ const Register = ({ name }) => {
           required
         />
         <span className="register__error">{errors.password}</span>
-        <button className="register__submit-button" type="submit" disabled={submitButtonDisable}>
+        <button className="register__submit-button" type="submit">
           Зарегистрироваться
         </button>
       </form>
