@@ -1,6 +1,7 @@
 .register__submit-button {
+  margin-top: 186px;
+  padding: 0;
   padding: 14px 84px;
-  margin: 186px 0 15px;
   font-size: 18px;
   line-height: 22px;
 }

@@ -1,18 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import * as auth from "../utils/auth.js";
+import { Link } from "react-router-dom";
 import useValidation from "../hooks/useValidation.js";
 
 const Register = ({ name, onRegister }) => {
-  const navigate = useNavigate();
   const { values, errors, onChange } = useValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { password, email } = values;
-    auth.register(password, email).then((res) => {
-      navigate("/sign-in", { replace: true });
-      onRegister();
-    });
+    onRegister(values);
   };
 
   return (
@@ -49,7 +43,7 @@ const Register = ({ name, onRegister }) => {
         </button>
       </form>
       <div className="register__signin">
-        <p>Уже зарегистрированы?</p>
+        <p className="register__signin-text">Уже зарегистрированы?</p>
         <Link to="/sign-in" className="register__signin-link">
           Войти
         </Link>

@@ -1,0 +1,11 @@
+.header__button {
+  margin-left: 24px;
+  background-color: black;
+  color: #a9a9a9;
+  border: none;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height, or 122% */
+
+  text-align: right;
+}

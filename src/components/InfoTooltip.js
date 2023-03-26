@@ -11,7 +11,7 @@ function InfoTooltip({ isOpen, onClose, name, isSuccess }) {
       <div className="popup__container">
         <button className="popup__close" type="button" onClick={onClose}></button>
         <img className="popup__register-image" src={imageSrc} alt={headerText} />
-        <h3 className="popup__register-title">Вы успешно зарегистрировались</h3>
+        <h3 className="popup__register-title">{headerText}</h3>
       </div>
     </Popup>
   );

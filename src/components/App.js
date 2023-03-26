@@ -37,6 +37,7 @@ function App() {
   const [cardToDelete, setCardToDelete] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -71,9 +72,20 @@ function App() {
     }
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setLoggedIn(true);
+  const handleLogin = (values) => {
+    if (!values.email || !values.password) {
+      return;
+    }
+    auth
+      .authorize(values.password, values.email)
+      .then((data) => {
+        if (data.token) {
+          setLoggedIn(true);
+          setUserEmail(values.email);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   function signOut() {
@@ -191,8 +203,19 @@ function App() {
     setCardToDelete(card);
   }
 
-  function handleRegisterClick() {
-    setIsInfoTooltipOpen(true);
+  function handleRegisterClick(values) {
+    const { password, email } = values;
+    auth
+      .register(password, email)
+      .then((res) => {
+        navigate("/sign-in", { replace: true });
+        setIsRegistrationSuccessful(true);
+        setIsInfoTooltipOpen(true);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+        setIsInfoTooltipOpen(false);
+      });
   }
 
   function handleCardClick({ name, link }) {
@@ -212,10 +235,10 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          <Header loggedIn={loggedIn} onSignOut={signOut} />
+          <Header loggedIn={loggedIn} onSignOut={signOut} userEmail={userEmail} />
           <Routes>
             <Route path="/sign-up" element={<Register onRegister={handleRegisterClick} />} />
-            <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+            <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
             <Route
               path="/"
               element={
@@ -268,7 +291,12 @@ function App() {
             name="delete-card"
           />
 
-          <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} name="register" />
+          <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            onClose={closeAllPopups}
+            name="register"
+            isSuccess={isRegistrationSuccessful}
+          />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} name="image" />
         </div>

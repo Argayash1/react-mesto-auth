@@ -1,2 +1,9 @@
 .popup__register-title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  max-width: 358px;
+  height: 58px;
+  margin: 32px 34px 20px;
 }

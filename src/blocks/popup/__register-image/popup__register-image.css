@@ -1,2 +1,5 @@
 .popup__register-image {
+  width: 120px;
+  height: 120px;
+  margin: 28px auto 0;
 }
