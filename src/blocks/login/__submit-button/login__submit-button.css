@@ -4,4 +4,10 @@
   padding: 14px 84px;
   font-size: 18px;
   line-height: 22px;
+  cursor: pointer;
+  transition: opacity 0.5s linear;
+}
+
+.login__submit-button:hover {
+  opacity: 0.8;
 }
