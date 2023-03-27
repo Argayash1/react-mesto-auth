@@ -2,4 +2,9 @@
   text-decoration: none;
   color: white;
   margin-left: 3px;
+  transition: opacity 0.5s linear;
+}
+
+.register__signin-link:hover {
+  opacity: 0.8;
 }

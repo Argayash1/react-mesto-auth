@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom"; // импортируем Routes, Route и Navigate
 
 import ProtectedRouteElement from "../components/ProtectedRoute.js"; // импортируем HOC
@@ -40,37 +40,38 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, cardsData]) => {
-        setCurrentUser(userData);
-        setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
-  }, []);
+  const tokenCheck = useCallback(
+    function tokenCheck() {
+      // если у пользователя есть токен в localStorage,
+      // эта функция проверит валидность токена
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        // проверим токен
+        auth.getContent(jwt).then((userData) => {
+          if (userData) {
+            // авторизуем пользователя
+            setLoggedIn(true);
+            setUserEmail(userData.data.email);
+            navigate("/", { replace: true });
+          }
+        });
+      }
+    },
+    [navigate]
+  );
 
   useEffect(() => {
     tokenCheck();
-  }, []);
-
-  const tokenCheck = () => {
-    // если у пользователя есть токен в localStorage,
-    // эта функция проверит валидность токена
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      // проверим токен
-      auth.getContent(jwt).then((userData) => {
-        if (userData) {
-          // авторизуем пользователя
-          setLoggedIn(true);
-          setUserEmail(userData.data.email);
-          navigate("/", { replace: true });
-        }
-      });
-    }
-  };
+    loggedIn &&
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userData, cardsData]) => {
+          setCurrentUser(userData);
+          setCards(cardsData);
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        });
+  }, [loggedIn, tokenCheck]);
 
   function handleRegister(values) {
     const { password, email } = values;
