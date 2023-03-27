@@ -6,8 +6,7 @@ import Register from "../components/Register.js";
 import Login from "../components/Login.js";
 
 import Header from "../components/Header.js";
-import Main from "../components/Main.js";
-import Footer from "../components/Footer.js";
+import Page from "../components/Page.js";
 
 import EditProfilePopup from "../components/EditProfilePopup.js";
 import EditAvatarPopup from "../components/EditAvatarPopup.js";
@@ -62,15 +61,32 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       // проверим токен
-      auth.getContent(jwt).then((res) => {
-        if (res) {
+      auth.getContent(jwt).then((userData) => {
+        if (userData) {
           // авторизуем пользователя
           setLoggedIn(true);
+          setUserEmail(userData.data.email);
           navigate("/", { replace: true });
         }
       });
     }
   };
+
+  function handleRegister(values) {
+    const { password, email } = values;
+    auth
+      .register(password, email)
+      .then((res) => {
+        setIsRegistrationSuccessful(true);
+        setIsInfoTooltipOpen(true);
+        navigate("/sign-in", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+        setIsRegistrationSuccessful(false);
+        setIsInfoTooltipOpen(true);
+      });
+  }
 
   const handleLogin = (values) => {
     if (!values.email || !values.password) {
@@ -92,6 +108,7 @@ function App() {
     localStorage.removeItem("jwt");
     navigate("sign-in", { replace: true });
     setLoggedIn(false);
+    setUserEmail("");
   }
 
   function handleCardLike(card) {
@@ -203,21 +220,6 @@ function App() {
     setCardToDelete(card);
   }
 
-  function handleRegisterClick(values) {
-    const { password, email } = values;
-    auth
-      .register(password, email)
-      .then((res) => {
-        navigate("/sign-in", { replace: true });
-        setIsRegistrationSuccessful(true);
-        setIsInfoTooltipOpen(true);
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-        setIsInfoTooltipOpen(false);
-      });
-  }
-
   function handleCardClick({ name, link }) {
     setSelectedCard({ name, link });
   }
@@ -237,13 +239,13 @@ function App() {
         <div className="page">
           <Header loggedIn={loggedIn} onSignOut={signOut} userEmail={userEmail} />
           <Routes>
-            <Route path="/sign-up" element={<Register onRegister={handleRegisterClick} />} />
+            <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
             <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
             <Route
               path="/"
               element={
                 <ProtectedRouteElement
-                  element={Main}
+                  element={Page}
                   loggedIn={loggedIn}
                   onEditProfile={handleEditProfileClick}
                   onAddPlace={handleAddPlaceClick}
@@ -256,7 +258,6 @@ function App() {
               }
             />
           </Routes>
-          <Footer />
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}

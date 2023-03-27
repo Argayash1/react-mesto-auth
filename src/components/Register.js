@@ -34,7 +34,7 @@ const Register = ({ name, onRegister }) => {
           id="password"
           placeholder="Пароль"
           autoComplete="off"
-          minlength="8"
+          minLength="8"
           required
         />
         <span className="register__error">{errors.password}</span>
