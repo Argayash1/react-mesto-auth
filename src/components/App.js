@@ -35,7 +35,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardToDelete, setCardToDelete] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
+  const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
   const navigate = useNavigate();
@@ -75,16 +75,16 @@ function App() {
 
   function handleRegister(values) {
     const { password, email } = values;
-    auth
+    return auth
       .register(password, email)
       .then((res) => {
-        setIsRegistrationSuccessful(true);
+        setIsRegisterSuccess(true);
         setIsInfoTooltipOpen(true);
         navigate("/sign-in", { replace: true });
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-        setIsRegistrationSuccessful(false);
+        setIsRegisterSuccess(false);
         setIsInfoTooltipOpen(true);
       });
   }
@@ -106,9 +106,9 @@ function App() {
   };
 
   function signOut() {
+    setLoggedIn(false);
     localStorage.removeItem("jwt");
     navigate("sign-in", { replace: true });
-    setLoggedIn(false);
     setUserEmail("");
   }
 
@@ -297,7 +297,7 @@ function App() {
             isOpen={isInfoTooltipOpen}
             onClose={closeAllPopups}
             name="register"
-            isSuccess={isRegistrationSuccessful}
+            isSuccess={isRegisterSuccess}
           />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} name="image" />

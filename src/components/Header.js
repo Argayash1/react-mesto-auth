@@ -23,7 +23,7 @@ function Header({ loggedIn, onSignOut, userEmail }) {
           <Route
             path="/sign-in"
             element={
-              <NavLink className="header__navlink" to="/sign-up" exact>
+              <NavLink className="header__navlink" to="/sign-up">
                 Регистрация
               </NavLink>
             }
@@ -31,7 +31,7 @@ function Header({ loggedIn, onSignOut, userEmail }) {
           <Route
             path="/sign-up"
             element={
-              <NavLink className="header__navlink" to="/sign-in" exact>
+              <NavLink className="header__navlink" to="/sign-in">
                 Войти
               </NavLink>
             }

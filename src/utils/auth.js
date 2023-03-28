@@ -8,20 +8,26 @@ export const register = (password, email) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ password, email }),
-  })
-    .then((response) => {
-      try {
-        if (response.status === 200) {
-          return response.json();
-        }
-      } catch (e) {
-        return e;
-      }
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => console.log(err));
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+
+  //   // try {
+  //   //   if (response.status === 200) {
+  //   return response.json();
+  //   // }
+  //   // } catch (e) {
+  //   //   return e;
+  //   // }
+  // })
+  // .then((res) => {
+  //   return res;
+  // })
+  // .catch((err) => console.log(err));
 };
 
 export const authorize = (password, email) => {
