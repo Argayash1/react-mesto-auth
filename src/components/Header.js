@@ -12,7 +12,7 @@ function Header({ loggedIn, onSignOut, userEmail }) {
               path="/"
               element={
                 <>
-                  <span>{userEmail}</span>
+                  <span className="header__usermail">{userEmail}</span>
                   <button onClick={onSignOut} className="header__button">
                     Выйти
                   </button>
