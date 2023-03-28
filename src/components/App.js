@@ -102,7 +102,11 @@ function App() {
           navigate("/", { replace: true });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsRegisterSuccess(false);
+        setIsInfoTooltipOpen(true);
+      });
   };
 
   function signOut() {
