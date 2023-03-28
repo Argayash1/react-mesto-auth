@@ -10,3 +10,17 @@
 .header__navlink:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 968px) {
+  .header__navlink {
+    margin-right: 44px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .header__navlink {
+    margin-right: 27px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

@@ -6,8 +6,6 @@ function InfoTooltip({ isOpen, onClose, name, isSuccess }) {
   const headerText = isSuccess ? "Вы успешно зарегистрировались" : "Что-то пошло не так! Попробуйте ещё раз";
   const imageSrc = isSuccess ? success : fail;
 
-  console.log(isSuccess);
-
   return (
     <Popup name={name} isOpen={isOpen} onClose={onClose}>
       <div className="popup__container">

@@ -11,3 +11,17 @@
 .login__submit-button:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 968px) {
+  .login__submit-button {
+    margin-top: 180px;
+    padding: 14px 60px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .login__submit-button {
+    margin-top: 173px;
+    padding: 14px 35px;
+  }
+}
