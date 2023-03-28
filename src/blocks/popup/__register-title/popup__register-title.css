@@ -1,9 +1,18 @@
 .popup__register-title {
+  max-width: 358px;
+  /* height: 58px; */
+  margin: 32px 34px 20px;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  max-width: 358px;
-  height: 58px;
-  margin: 32px 34px 20px;
+}
+
+@media screen and (max-width: 740px) {
+  .popup__register-title {
+    max-width: 280px;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 41px 18px 25px;
+  }
 }

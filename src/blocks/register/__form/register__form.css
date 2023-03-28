@@ -4,3 +4,15 @@
   max-width: 358px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 968px) {
+  .register__form {
+    max-width: 308px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .register__form {
+    max-width: 260px;
+  }
+}

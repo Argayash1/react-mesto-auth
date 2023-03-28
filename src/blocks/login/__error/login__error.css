@@ -1,0 +1,8 @@
+.login__error {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.15;
+  color: #ff0000;
+  padding: 0;
+  margin: 3px 0 0;
+}
