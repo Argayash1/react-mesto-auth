@@ -41,9 +41,18 @@ function App() {
 
   const navigate = useNavigate();
 
-  window.onresize = () => {
-    setIsMobileMenuOpen(false);
-  };
+  useEffect(() => {
+    function handleAutoCloseMenu() {
+      window.onresize = () => {
+        setIsMobileMenuOpen(false);
+      };
+    }
+
+    if (isMobileMenuOpen) {
+      window.addEventListener("resize", handleAutoCloseMenu);
+      return () => window.removeEventListener("resize", handleAutoCloseMenu);
+    }
+  }, [isMobileMenuOpen]);
 
   const tokenCheck = useCallback(
     function tokenCheck() {

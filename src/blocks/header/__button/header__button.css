@@ -11,6 +11,7 @@
 
 @media screen and (max-width: 500px) {
   .header__button {
-    margin-top: 18px;
+    max-width: 100px;
+    margin: 18px auto 0;
   }
 }
