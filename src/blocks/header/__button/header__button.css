@@ -8,3 +8,9 @@
   text-align: center;
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  .header__button {
+    margin-top: 18px;
+  }
+}

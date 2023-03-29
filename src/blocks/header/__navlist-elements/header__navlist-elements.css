@@ -1,10 +1,15 @@
 .header__navlist-elements {
   display: flex;
+  transition: visibility 0.2s linear;
 }
 
 @media screen and (max-width: 500px) {
   .header__navlist-elements {
     visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;

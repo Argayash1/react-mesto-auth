@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   font-family: "Inter", "Helvetica Neue", "Arial", sans-serif;
-  transition: margin 0.4s linear;
+  transition: margin 0.3s linear;
 }
 
 @media screen and (max-width: 968px) {
