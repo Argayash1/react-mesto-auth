@@ -2,6 +2,7 @@
 @import url(./vendor/fonts/fonts.css);
 
 @import url(./blocks/body/body.css);
+@import url(./blocks/body/_is-loading/body_is-loading.css);
 
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__content/page__content.css);

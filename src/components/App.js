@@ -36,6 +36,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardToDelete, setCardToDelete] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
@@ -61,14 +62,19 @@ function App() {
       const jwt = localStorage.getItem("jwt");
       if (jwt) {
         // проверим токен
-        auth.getContent(jwt).then((userData) => {
-          if (userData) {
-            // авторизуем пользователя
-            setLoggedIn(true);
-            setUserEmail(userData.data.email);
-            navigate("/", { replace: true });
-          }
-        });
+        auth
+          .getContent(jwt)
+          .then((userData) => {
+            if (userData) {
+              // авторизуем пользователя
+              setLoggedIn(true);
+              setUserEmail(userData.data.email);
+              navigate("/", { replace: true });
+            }
+          })
+          .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+          });
       }
     },
     [navigate]
@@ -84,8 +90,15 @@ function App() {
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
+        })
+        .finally(() => {
+          setLoading(false);
         });
   }, [loggedIn, tokenCheck]);
+
+  if (loading) {
+    return <div className="body body_is-loading">Loading...</div>;
+  }
 
   function handleRegister(values) {
     const { password, email } = values;
