@@ -7,7 +7,13 @@
 @import url(./blocks/page/__content/page__content.css);
 
 @import url(./blocks/header/header.css);
+@import url(./blocks/header/_is-enlarged/header_is-enlarged.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__navlist/header__navlist.css);
+@import url(./blocks/header/__navlist-item/header__navlist-item.css);
+@import url(./blocks/header/__navlist-elements/header__navlist-elements.css);
+@import url(./blocks/header/__navlist-elements/__is-active/header__navlist-elements_is-active.css);
+@import url(./blocks/header/__navlist-button/header__navlist-button.css);
 @import url(./blocks/header/__usermail/header__usermail.css);
 @import url(./blocks/header/__button/header__button.css);
 @import url(./blocks/header/__navlink/header__navlink.css);

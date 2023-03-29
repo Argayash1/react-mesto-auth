@@ -1,0 +1,4 @@
+.header__navlist {
+  list-style: none;
+  display: flex;
+}

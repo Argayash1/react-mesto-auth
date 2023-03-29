@@ -27,6 +27,7 @@ function App() {
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isEditProfilePopupLoading, setIsEditProfilePopupLoading] = useState(false);
   const [isAddPlacePopupLoading, setIsAddPlacePopupLoading] = useState(false);
   const [isEditAvatarPopupLoading, setIsEditAvatarPopupLoading] = useState(false);
@@ -229,6 +230,14 @@ function App() {
     setSelectedCard({ name, link });
   }
 
+  function handleMobileMenuClick() {
+    setIsMobileMenuOpen(true);
+  }
+
+  function handleCloseMobileMenu() {
+    setIsMobileMenuOpen(false);
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -242,7 +251,14 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          <Header loggedIn={loggedIn} onSignOut={signOut} userEmail={userEmail} />
+          <Header
+            loggedIn={loggedIn}
+            onSignOut={signOut}
+            userEmail={userEmail}
+            isOpen={isMobileMenuOpen}
+            onMobileMenu={handleMobileMenuClick}
+            onClose={handleCloseMobileMenu}
+          />
           <Routes>
             <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
             <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />

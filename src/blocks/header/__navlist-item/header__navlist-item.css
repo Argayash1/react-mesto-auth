@@ -1,0 +1,11 @@
+.header__navlist-item {
+  display: flex;
+}
+
+@media screen and (max-width: 500px) {
+  .header__navlist-item {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+  }
+}
