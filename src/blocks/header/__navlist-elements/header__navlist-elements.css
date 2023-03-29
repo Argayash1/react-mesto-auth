@@ -5,13 +5,9 @@
 @media screen and (max-width: 500px) {
   .header__navlist-elements {
     visibility: hidden;
-    /* position: absolute; */
-    /* top: 0;
-    right: 40;
-    left: 0;
-    bottom: 0; */
     flex-direction: column;
     justify-content: center;
-    /* transition: visibility 0.5s linear; */
+    margin: 0 auto;
+    text-align: center;
   }
 }

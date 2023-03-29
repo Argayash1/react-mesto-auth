@@ -4,8 +4,6 @@
 
 @media screen and (max-width: 500px) {
   .header__navlist-item {
-    position: relative;
-    justify-content: center;
-    text-align: center;
+    margin: 0 auto;
   }
 }

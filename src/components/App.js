@@ -41,6 +41,10 @@ function App() {
 
   const navigate = useNavigate();
 
+  window.onresize = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   const tokenCheck = useCallback(
     function tokenCheck() {
       // если у пользователя есть токен в localStorage,
