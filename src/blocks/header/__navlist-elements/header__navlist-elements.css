@@ -1,6 +1,6 @@
 .header__navlist-elements {
   display: flex;
-  transition: visibility 0.2s linear;
+  transition: transform 0.3s linear;
 }
 
 @media screen and (max-width: 500px) {

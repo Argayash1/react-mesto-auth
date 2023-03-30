@@ -1,6 +1,5 @@
 function PopupWithForm({ title, name, children, onClose, onSubmit, submitButtonText, isLoading, isValid }) {
   const submitButtonDisable = (isLoading || isValid) && true;
-
   const submitButtonClassName = `popup__save ${isValid && "popup__save_disabled"}`;
 
   return (

@@ -55,30 +55,34 @@ function App() {
     }
   }, [isMobileMenuOpen]);
 
-  const tokenCheck = useCallback(
-    function tokenCheck() {
-      // если у пользователя есть токен в localStorage,
-      // эта функция проверит валидность токена
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        // проверим токен
-        auth
-          .getContent(jwt)
-          .then((userData) => {
-            if (userData) {
-              // авторизуем пользователя
-              setLoggedIn(true);
-              setUserEmail(userData.data.email);
-              navigate("/", { replace: true });
-            }
-          })
-          .catch((err) => {
-            console.log(err); // выведем ошибку в консоль
-          });
-      }
-    },
-    [navigate]
-  );
+  const tokenCheck = useCallback(() => {
+    // если у пользователя есть токен в localStorage,
+    // эта функция проверит валидность токена
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      // проверим токен
+      auth
+        .getContent(jwt)
+        .then((userData) => {
+          if (userData) {
+            // авторизуем пользователя
+            setLoggedIn(true);
+            setUserEmail(userData.data.email);
+            navigate("/", { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
+  }, [navigate]);
+
+  console.log(loading);
 
   useEffect(() => {
     tokenCheck();
@@ -90,15 +94,8 @@ function App() {
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
-        })
-        .finally(() => {
-          setLoading(false);
         });
   }, [loggedIn, tokenCheck]);
-
-  if (loading) {
-    return <div className="body body_is-loading">Loading...</div>;
-  }
 
   function handleRegister(values) {
     const { password, email } = values;
@@ -136,11 +133,12 @@ function App() {
       });
   };
 
-  function signOut() {
+  function handleSignOut() {
     setLoggedIn(false);
     localStorage.removeItem("jwt");
     navigate("sign-in", { replace: true });
     setUserEmail("");
+    setIsMobileMenuOpen(false);
   }
 
   function handleCardLike(card) {
@@ -264,6 +262,10 @@ function App() {
     setIsMobileMenuOpen(false);
   }
 
+  function handleLoading() {
+    setLoading(false);
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -275,80 +277,86 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="body">
-        <div className="page">
-          <Header
-            loggedIn={loggedIn}
-            onSignOut={signOut}
-            userEmail={userEmail}
-            isOpen={isMobileMenuOpen}
-            onMobileMenu={handleMobileMenuClick}
-            onClose={handleCloseMobileMenu}
-          />
-          <Routes>
-            <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
-            <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRouteElement
-                  element={Page}
-                  loggedIn={loggedIn}
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleDeleteCardClick}
-                  cards={cards}
-                />
-              }
+      {loading ? (
+        <div className="body body_is-loading">Loading...</div>
+      ) : (
+        <div className="body">
+          <div className="page">
+            <Header
+              loggedIn={loggedIn}
+              onSignOut={handleSignOut}
+              userEmail={userEmail}
+              isOpen={isMobileMenuOpen}
+              onMobileMenu={handleMobileMenuClick}
+              onClose={handleCloseMobileMenu}
             />
-          </Routes>
 
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-            isLoading={isEditProfilePopupLoading}
-            name="profile"
-          />
+            <Routes>
+              <Route path="/sign-up" element={<Register onRegister={handleRegister} onLoading={handleLoading} />} />
+              <Route path="/sign-in" element={<Login onLogin={handleLogin} onLoading={handleLoading} />} />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRouteElement
+                    element={Page}
+                    loggedIn={loggedIn}
+                    isLoading={loading}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleDeleteCardClick}
+                    cards={cards}
+                  />
+                }
+              />
+            </Routes>
 
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlace={handleAddPlaceSubmit}
-            isLoading={isAddPlacePopupLoading}
-            name="card"
-          />
+            <EditProfilePopup
+              isOpen={isEditProfilePopupOpen}
+              onClose={closeAllPopups}
+              onUpdateUser={handleUpdateUser}
+              isLoading={isEditProfilePopupLoading}
+              name="profile"
+            />
 
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-            isLoading={isEditAvatarPopupLoading}
-            name="new-avatar"
-          />
+            <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClose={closeAllPopups}
+              onAddPlace={handleAddPlaceSubmit}
+              isLoading={isAddPlacePopupLoading}
+              name="card"
+            />
 
-          <ConfirmDeletePopup
-            isOpen={isDeletePopupOpen}
-            onClose={closeAllPopups}
-            card={cardToDelete}
-            onCardDelete={handleCardDelete}
-            isLoading={isDeletePopupLoading}
-            name="delete-card"
-          />
+            <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClose={closeAllPopups}
+              onUpdateAvatar={handleUpdateAvatar}
+              isLoading={isEditAvatarPopupLoading}
+              name="new-avatar"
+            />
 
-          <InfoTooltip
-            isOpen={isInfoTooltipOpen}
-            onClose={closeAllPopups}
-            name="register"
-            isSuccess={isRegisterSuccess}
-          />
+            <ConfirmDeletePopup
+              isOpen={isDeletePopupOpen}
+              onClose={closeAllPopups}
+              card={cardToDelete}
+              onCardDelete={handleCardDelete}
+              isLoading={isDeletePopupLoading}
+              name="delete-card"
+            />
 
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} name="image" />
+            <InfoTooltip
+              isOpen={isInfoTooltipOpen}
+              onClose={closeAllPopups}
+              name="register"
+              isSuccess={isRegisterSuccess}
+            />
+
+            <ImagePopup card={selectedCard} onClose={closeAllPopups} name="image" />
+          </div>
         </div>
-      </div>
+      )}
     </CurrentUserContext.Provider>
   );
 }

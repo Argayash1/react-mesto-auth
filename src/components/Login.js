@@ -1,6 +1,7 @@
+// import { useEffect } from "react";
 import useValidation from "../hooks/useValidation.js";
 
-function Login({ name, onLogin }) {
+function Login({ name, onLogin, onLoading }) {
   const { values, errors, onChange, resetValidation } = useValidation();
 
   const handleSubmit = (e) => {
