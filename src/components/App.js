@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom"; // импортируем Routes, Route и Navigate
 
+import Loader from "./Loader.js";
+
 import ProtectedRouteElement from "../components/ProtectedRoute.js"; // импортируем HOC
 import Register from "../components/Register.js";
 import Login from "../components/Login.js";
@@ -39,6 +41,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [errorText, setErrorText] = useState("");
 
   const navigate = useNavigate();
 
@@ -82,8 +85,6 @@ function App() {
     }
   }, [navigate]);
 
-  console.log(loading);
-
   useEffect(() => {
     tokenCheck();
     loggedIn &&
@@ -109,6 +110,7 @@ function App() {
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
         setIsRegisterSuccess(false);
+        setErrorText(err);
         setIsInfoTooltipOpen(true);
       });
   }
@@ -278,7 +280,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {loading ? (
-        <div className="body body_is-loading">Loading...</div>
+        <Loader />
       ) : (
         <div className="body">
           <div className="page">
@@ -351,6 +353,7 @@ function App() {
               onClose={closeAllPopups}
               name="register"
               isSuccess={isRegisterSuccess}
+              errorText={errorText}
             />
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} name="image" />
