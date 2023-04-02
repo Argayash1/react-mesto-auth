@@ -1,4 +1,5 @@
 .header__navlist-item {
+  align-self: flex-start;
   display: flex;
 }
 

@@ -2,13 +2,16 @@
 @import url(./vendor/fonts/fonts.css);
 
 @import url(./blocks/body/body.css);
-@import url(./blocks/body/_is-loading/body_is-loading.css);
 
 @import url(./blocks/loader/loader.css);
 @import url(./blocks/loader/__container/loader__container.css);
+@import url(./blocks/loader/__logo-container/loader__logo-container.css);
 @import url(./blocks/loader/__logo/loader__logo.css);
 @import url(./blocks/loader/__spinner/loader__spinner.css);
+@import url(./blocks/loader/__text-container/loader__text-container.css);
 @import url(./blocks/loader/__text/loader__text.css);
+@import url(./blocks/loader/__animated-text/loader____animated-text.css);
+@import url(./blocks/loader/__footer/loader__footer.css);
 
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__content/page__content.css);
@@ -25,12 +28,15 @@
 @import url(./blocks/header/__button/header__button.css);
 @import url(./blocks/header/__navlink/header__navlink.css);
 
+@import url(./blocks/navbar/navbar.css);
+
 @import url(./blocks/content/__elements/content__elements.css);
 
 @import url(./blocks/register/register.css);
 @import url(./blocks/register/__title/register__title.css);
 @import url(./blocks/register/__form/register__form.css);
 @import url(./blocks/register/__input/register__input.css);
+@import url(./blocks/register/__error/register__error.css);
 @import url(./blocks/register/__submit-button/register__submit-button.css);
 @import url(./blocks/register/__signin/register__signin.css);
 @import url(./blocks/register/__signin-text/register__signin-text.css);
@@ -76,6 +82,7 @@
 @import url(./blocks/popup/__input/popup__input.css);
 @import url(./blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(./blocks/popup/__error/popup__error.css);
+@import url(./blocks/popup/__error-text/popup__error-text.css);
 @import url(./blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(./blocks/popup/__save/popup__save.css);
 @import url(./blocks/popup/__save/_disabled/popup__save_disabled.css);

@@ -12,7 +12,7 @@ function InfoTooltip({ isOpen, onClose, name, isSuccess, errorText }) {
         <button className="popup__close" type="button" onClick={onClose}></button>
         <img className="popup__register-image" src={imageSrc} alt={headerText} />
         <h3 className="popup__register-title">{headerText}</h3>
-        {!isSuccess && <p>{errorText}</p>}
+        {!isSuccess && <p className="popup__error-text">{errorText}</p>}
       </div>
     </Popup>
   );

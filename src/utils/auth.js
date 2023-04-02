@@ -13,7 +13,10 @@ export const register = (password, email) => {
       return res.json();
     }
     // если ошибка, отклоняем промис
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return res.text().then((err) => {
+      const error = JSON.parse(err);
+      return Promise.reject(`Ошибка ${res.status}: ${error.message || error.error}`);
+    });
   });
 
   //   // try {
@@ -38,15 +41,19 @@ export const authorize = (password, email) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ password, email }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.token) {
-        localStorage.setItem("jwt", data.token);
-        return data;
-      }
-    })
-    .catch((err) => console.log(err));
+  }).then((res) => {
+    if (res.ok) {
+      return res.json().then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          return data;
+        }
+        return res.json().then((data) => {
+          return Promise.reject(res.status);
+        });
+      });
+    }
+  });
 };
 
 export const getContent = (token) => {

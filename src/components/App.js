@@ -103,6 +103,7 @@ function App() {
     return auth
       .register(password, email)
       .then((res) => {
+        // console.log(res);
         setIsRegisterSuccess(true);
         setIsInfoTooltipOpen(true);
         navigate("/sign-in", { replace: true });
@@ -275,6 +276,7 @@ function App() {
     setSelectedCard({});
     setIsDeletePopupOpen(false);
     setIsInfoTooltipOpen(false);
+    setErrorText("");
   }
 
   return (
@@ -291,29 +293,32 @@ function App() {
               isOpen={isMobileMenuOpen}
               onMobileMenu={handleMobileMenuClick}
               onClose={handleCloseMobileMenu}
+              isLoading={loading}
             />
 
-            <Routes>
-              <Route path="/sign-up" element={<Register onRegister={handleRegister} onLoading={handleLoading} />} />
-              <Route path="/sign-in" element={<Login onLogin={handleLogin} onLoading={handleLoading} />} />
-              <Route
-                path="/"
-                element={
-                  <ProtectedRouteElement
-                    element={Page}
-                    loggedIn={loggedIn}
-                    isLoading={loading}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleDeleteCardClick}
-                    cards={cards}
-                  />
-                }
-              />
-            </Routes>
+            <>
+              <Routes>
+                <Route path="/sign-up" element={<Register onRegister={handleRegister} onLoading={handleLoading} />} />
+                <Route path="/sign-in" element={<Login onLogin={handleLogin} onLoading={handleLoading} />} />
+                <Route
+                  path="/"
+                  element={
+                    <ProtectedRouteElement
+                      element={Page}
+                      loggedIn={loggedIn}
+                      isLoading={loading}
+                      onEditProfile={handleEditProfileClick}
+                      onAddPlace={handleAddPlaceClick}
+                      onEditAvatar={handleEditAvatarClick}
+                      onCardClick={handleCardClick}
+                      onCardLike={handleCardLike}
+                      onCardDelete={handleDeleteCardClick}
+                      cards={cards}
+                    />
+                  }
+                />
+              </Routes>
+            </>
 
             <EditProfilePopup
               isOpen={isEditProfilePopupOpen}

@@ -6,7 +6,9 @@ function Loader() {
   return (
     <div className="loader">
       <div className="loader__container">
-        <img className="loader__logo" src={logo} alt="Логотип" />
+        <div className="loader__logo-container">
+          <img className="loader__logo" src={logo} alt="Логотип" />
+        </div>
         <CircleLoader
           color="#ffffff"
           className="loader__spinner"
@@ -14,7 +16,10 @@ function Loader() {
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-        <p className="loader__text">Loading...</p>
+        <div className="loader__text-container">
+          <p className="loader__text">Loading</p>
+          <p className="loader__animated-text">...</p>
+        </div>
         <Footer />
       </div>
     </div>

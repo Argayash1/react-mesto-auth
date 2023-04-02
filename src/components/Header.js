@@ -2,14 +2,14 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import logo from "../images/header-logo.svg";
 
-function Header({ loggedIn, onSignOut, userEmail, isOpen, onMobileMenu, onClose }) {
+function Header({ loggedIn, onSignOut, userEmail, isOpen, onMobileMenu, onClose, isLoading }) {
   return (
     <header className={`header ${isOpen && "header_is-enlarged"}`}>
       <img className="header__logo" src={logo} alt="Логотип" />
-      <nav>
+      <nav className="navbar">
         <ul className="header__navlist">
           <Routes>
-            {loggedIn && (
+            {loggedIn && !isLoading && (
               <Route
                 path="/"
                 element={
@@ -29,7 +29,7 @@ function Header({ loggedIn, onSignOut, userEmail, isOpen, onMobileMenu, onClose 
             <Route
               path="/sign-in"
               element={
-                <li>
+                <li className="header__navlist-item">
                   <NavLink className="header__navlink" to="/sign-up">
                     Регистрация
                   </NavLink>

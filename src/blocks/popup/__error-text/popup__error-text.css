@@ -1,0 +1,7 @@
+.popup__error-text {
+  max-width: 250px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 16px;
+  /* text-align: center; */
+}
