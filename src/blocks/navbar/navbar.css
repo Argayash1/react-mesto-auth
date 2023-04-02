@@ -4,9 +4,3 @@
   display: flex;
   align-items: flex-start;
 }
-
-/* @media screen and (max-width: 500px) {
-  .navbar {
-    margin-top: 8px;
-  }
-} */

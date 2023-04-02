@@ -1,5 +1,7 @@
 .header__navlist-elements {
   display: flex;
+  align-items: flex-start;
+  padding-top: 8px;
   transition: transform 0.3s linear;
 }
 
