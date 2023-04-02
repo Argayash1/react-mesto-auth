@@ -19,16 +19,16 @@
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/_is-enlarged/header_is-enlarged.css);
 @import url(./blocks/header/__logo/header__logo.css);
-@import url(./blocks/header/__navlist/header__navlist.css);
-@import url(./blocks/header/__navlist-item/header__navlist-item.css);
-@import url(./blocks/header/__navlist-elements/header__navlist-elements.css);
-@import url(./blocks/header/__navlist-elements/__is-active/header__navlist-elements_is-active.css);
-@import url(./blocks/header/__navlist-button/header__navlist-button.css);
-@import url(./blocks/header/__usermail/header__usermail.css);
-@import url(./blocks/header/__button/header__button.css);
-@import url(./blocks/header/__navlink/header__navlink.css);
 
 @import url(./blocks/navbar/navbar.css);
+@import url(./blocks/navbar/__navlist/navbar__navlist.css);
+@import url(./blocks/navbar/__navlist-item/navbar__navlist-item.css);
+@import url(./blocks/navbar/__navlist-elements/navbar__navlist-elements.css);
+@import url(./blocks/navbar/__navlist-elements/__is-active/navbar__navlist-elements_is-active.css);
+@import url(./blocks/navbar/__usermail/navbar__usermail.css);
+@import url(./blocks/navbar/__navlist-button/navbar__navlist-button.css);
+@import url(./blocks/navbar/__button/navbar__button.css);
+@import url(./blocks/navbar/__navlink/navbar__navlink.css);
 
 @import url(./blocks/content/__elements/content__elements.css);
 

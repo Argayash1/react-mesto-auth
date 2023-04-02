@@ -1,16 +1,15 @@
-.header__navlist-button {
+.navbar__navlist-button {
   visibility: hidden;
-  /* align-self: center; */
   cursor: pointer;
   transition: opacity 0.5s linear;
 }
 
-.header__navlist-button:hover {
+.navbar__navlist-button:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 500px) {
-  .header__navlist-button {
+  .navbar__navlist-button {
     visibility: visible;
     margin-right: 27px;
   }
