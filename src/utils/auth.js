@@ -18,19 +18,6 @@ export const register = (password, email) => {
       return Promise.reject(`Ошибка ${res.status}: ${error.message || error.error}`);
     });
   });
-
-  //   // try {
-  //   //   if (response.status === 200) {
-  //   return response.json();
-  //   // }
-  //   // } catch (e) {
-  //   //   return e;
-  //   // }
-  // })
-  // .then((res) => {
-  //   return res;
-  // })
-  // .catch((err) => console.log(err));
 };
 
 export const authorize = (password, email) => {
@@ -43,16 +30,13 @@ export const authorize = (password, email) => {
     body: JSON.stringify({ password, email }),
   }).then((res) => {
     if (res.ok) {
-      return res.json().then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          return data;
-        }
-        return res.json().then((data) => {
-          return Promise.reject(res.status);
-        });
-      });
+      return res.json();
     }
+    // если ошибка, отклоняем промис
+    return res.text().then((err) => {
+      const error = JSON.parse(err);
+      return Promise.reject(`Ошибка ${res.status}: ${error.message || error.error}`);
+    });
   });
 };
 

@@ -126,12 +126,14 @@ function App() {
         if (data.token) {
           setLoggedIn(true);
           setUserEmail(values.email);
+          localStorage.setItem("jwt", data.token);
           navigate("/", { replace: true });
         }
       })
       .catch((err) => {
         console.log(err);
         setIsRegisterSuccess(false);
+        setErrorText(err);
         setIsInfoTooltipOpen(true);
       });
   };
