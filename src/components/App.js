@@ -143,6 +143,7 @@ function App() {
     localStorage.removeItem("jwt");
     navigate("sign-in", { replace: true });
     setUserEmail("");
+    setErrorText("");
     setIsMobileMenuOpen(false);
   }
 
@@ -278,7 +279,6 @@ function App() {
     setSelectedCard({});
     setIsDeletePopupOpen(false);
     setIsInfoTooltipOpen(false);
-    setErrorText("");
   }
 
   return (
