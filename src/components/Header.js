@@ -20,8 +20,8 @@ function Header({ loggedIn, onSignOut, userEmail, isOpen, onMobileMenu, onClose,
                         Выйти
                       </button>
                     </div>
-                    {!isOpen && <AiOutlineMenu className="header__navlist-button" size="24" onClick={onMobileMenu} />}
-                    {isOpen && <AiOutlineClose className="header__navlist-button" size="20" onClick={onClose} />}
+                    {!isOpen && <AiOutlineMenu className="header__navlist-button" size="30" onClick={onMobileMenu} />}
+                    {isOpen && <AiOutlineClose className="header__navlist-button" size="30" onClick={onClose} />}
                   </li>
                 }
               />
@@ -39,7 +39,7 @@ function Header({ loggedIn, onSignOut, userEmail, isOpen, onMobileMenu, onClose,
             <Route
               path="/sign-up"
               element={
-                <li>
+                <li className="header__navlist-item">
                   <NavLink className="header__navlink" to="/sign-in">
                     Войти
                   </NavLink>

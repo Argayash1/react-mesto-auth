@@ -16,3 +16,10 @@
     min-height: 55px;
   }
 }
+
+/* @media screen and (max-width: 500px) {
+  .header {
+    padding-bottom: 29px;
+    box-sizing: border-box;
+  }
+} */

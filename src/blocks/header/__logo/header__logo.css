@@ -11,14 +11,8 @@
 
 @media screen and (max-width: 740px) {
   .header__logo {
-    margin-left: 27px;
+    margin-left: 30px;
     max-width: 104px;
     max-height: 24px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .header__logo {
-    align-self: center;
   }
 }

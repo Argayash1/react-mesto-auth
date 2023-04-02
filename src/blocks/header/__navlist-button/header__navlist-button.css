@@ -1,6 +1,6 @@
 .header__navlist-button {
   visibility: hidden;
-  align-self: center;
+  /* align-self: center; */
   cursor: pointer;
   transition: opacity 0.5s linear;
 }
@@ -12,6 +12,6 @@
 @media screen and (max-width: 500px) {
   .header__navlist-button {
     visibility: visible;
-    margin-right: 30px;
+    margin-right: 27px;
   }
 }
