@@ -5,6 +5,7 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
+  cursor: pointer;
   transition: opacity 0.5s linear;
 }
 

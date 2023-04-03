@@ -1,8 +1,10 @@
 // import { useEffect } from "react";
 import useValidation from "../hooks/useValidation.js";
 
-function Login({ name, onLogin, onLoading }) {
-  const { values, errors, onChange, resetValidation } = useValidation();
+function Login({ name, onLogin, isLoading }) {
+  const { values, errors, formValid, onChange, resetValidation } = useValidation();
+  const submitButtonDisable = (isLoading || !formValid) && true;
+  const submitButtonClassName = `login__submit-button ${!formValid && "login__submit-button_disabled"}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,8 +41,8 @@ function Login({ name, onLogin, onLoading }) {
           required
         />
         <span className="login__error">{errors.password}</span>
-        <button className="login__submit-button" type="submit">
-          Войти
+        <button className={submitButtonClassName} type="submit" disabled={submitButtonDisable}>
+          {isLoading ? "Вход..." : "Войти"}
         </button>
       </form>
     </div>

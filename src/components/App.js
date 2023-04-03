@@ -34,6 +34,8 @@ function App() {
   const [isAddPlacePopupLoading, setIsAddPlacePopupLoading] = useState(false);
   const [isEditAvatarPopupLoading, setIsEditAvatarPopupLoading] = useState(false);
   const [isDeletePopupLoading, setIsDeletePopupLoading] = useState(false);
+  const [isRegisterLoading, setIsRegisterLoading] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [cardToDelete, setCardToDelete] = useState({});
@@ -99,6 +101,7 @@ function App() {
   }, [loggedIn, tokenCheck]);
 
   function handleRegister(values) {
+    setIsRegisterLoading(true);
     const { password, email } = values;
     return auth
       .register(password, email)
@@ -113,10 +116,16 @@ function App() {
         setIsRegisterSuccess(false);
         setErrorText(err);
         setIsInfoTooltipOpen(true);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsRegisterLoading(false);
+        }, 1500);
       });
   }
 
   const handleLogin = (values) => {
+    setIsLoginLoading(true);
     if (!values.email || !values.password) {
       return;
     }
@@ -135,6 +144,11 @@ function App() {
         setIsRegisterSuccess(false);
         setErrorText(err);
         setIsInfoTooltipOpen(true);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoginLoading(false);
+        }, 1500);
       });
   };
 
@@ -268,10 +282,6 @@ function App() {
     setIsMobileMenuOpen(false);
   }
 
-  function handleLoading() {
-    setLoading(false);
-  }
-
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -300,8 +310,14 @@ function App() {
 
             <>
               <Routes>
-                <Route path="/sign-up" element={<Register onRegister={handleRegister} onLoading={handleLoading} />} />
-                <Route path="/sign-in" element={<Login onLogin={handleLogin} onLoading={handleLoading} />} />
+                <Route
+                  path="/sign-up"
+                  element={<Register name="register" onRegister={handleRegister} isLoading={isRegisterLoading} />}
+                />
+                <Route
+                  path="/sign-in"
+                  element={<Login name="login" onLogin={handleLogin} isLoading={isLoginLoading} />}
+                />
                 <Route
                   path="/"
                   element={

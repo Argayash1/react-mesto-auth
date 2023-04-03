@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import useValidation from "../hooks/useValidation.js";
 
-const Register = ({ name, onRegister }) => {
-  const { values, errors, onChange } = useValidation();
+const Register = ({ name, onRegister, isLoading }) => {
+  const { values, errors, formValid, onChange } = useValidation();
+  const submitButtonDisable = (isLoading || !formValid) && true;
+  const submitButtonClassName = `register__submit-button ${!formValid && "register__submit-button_disabled"}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,8 +40,8 @@ const Register = ({ name, onRegister }) => {
           required
         />
         <span className="register__error">{errors.password}</span>
-        <button className="register__submit-button" type="submit">
-          Зарегистрироваться
+        <button className={submitButtonClassName} type="submit" disabled={submitButtonDisable}>
+          {isLoading ? "Регистрация..." : "Зарегистрироваться"}
         </button>
       </form>
       <div className="register__signin">
