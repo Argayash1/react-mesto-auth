@@ -1,6 +1,5 @@
 import logo from "../images/header-logo.svg";
 import CircleLoader from "react-spinners/CircleLoader";
-import ClipLoader from "react-spinners/ClipLoader";
 import Footer from "./Footer.js";
 
 function Loader() {
