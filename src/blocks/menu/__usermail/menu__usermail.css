@@ -5,9 +5,3 @@
   line-height: 22px;
   text-align: center;
 }
-
-@media screen and (max-width: 500px) {
-  .menu__usermail {
-    visibility: hidden;
-  }
-}

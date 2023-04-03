@@ -1,6 +1,6 @@
 .mobile-menu__elements {
   position: fixed;
-  top: -105px;
+  top: -120px;
   right: 0;
   left: 0;
   display: flex;
@@ -10,12 +10,6 @@
   margin: 41px auto 0;
   padding-top: 8px;
   text-align: center;
-  visibility: hidden;
+  visibility: visible;
   transition: transform 0.3s linear;
-}
-
-@media screen and (max-width: 500px) {
-  .mobile-menu__elements {
-    visibility: visible;
-  }
 }

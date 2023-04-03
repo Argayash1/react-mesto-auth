@@ -6,7 +6,7 @@
   transition: transform 0.3s linear;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 580px) {
   .menu__elements {
     visibility: hidden;
   }

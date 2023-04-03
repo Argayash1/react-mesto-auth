@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 580px) {
   .mobile-menu__button {
     visibility: visible;
   }
