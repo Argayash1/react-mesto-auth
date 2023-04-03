@@ -81,7 +81,7 @@ function App() {
           setLoading(false);
         });
     } else {
-      setLoading(true);
+      setLoading(false);
     }
   }, [navigate]);
 
