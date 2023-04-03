@@ -1,22 +1,20 @@
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import useValidation from "../hooks/useValidation.js";
 import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading, name }) {
-  const ref = useRef(); // записываем объект, возвращаемый хуком, в переменную
   const { values, errors, formValid, onChange, resetValidation } = useValidation(); // данные для валидации
 
   useEffect(() => {
     resetValidation();
-    ref.current.value = "";
   }, [isOpen, resetValidation]);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     onUpdateAvatar({
-      avatar: ref.current.value,
+      avatar: values.url,
     });
   }
 
@@ -33,7 +31,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading, name }) {
       >
         <input
           type="url"
-          ref={ref}
           value={values.url || ""}
           onChange={onChange}
           id="image-url"
