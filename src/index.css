@@ -30,6 +30,16 @@
 @import url(./blocks/navbar/__button/navbar__button.css);
 @import url(./blocks/navbar/__navlink/navbar__navlink.css);
 
+@import url(./blocks/menu/__elements/menu__elements.css);
+@import url(./blocks/menu/__usermail/menu__usermail.css);
+@import url(./blocks/menu/__button/menu__button.css);
+
+@import url(./blocks/mobile-menu/__elements/mobile-menu__elements.css);
+@import url(./blocks/mobile-menu/__elements/__is-active/mobile-menu__elements_is-active.css);
+@import url(./blocks/mobile-menu/__usermail/mobile-menu__usermail.css);
+@import url(./blocks/mobile-menu/__button/mobile-menu__button.css);
+@import url(./blocks/mobile-menu/__navbutton/mobile-menu__navbutton.css);
+
 @import url(./blocks/content/__elements/content__elements.css);
 
 @import url(./blocks/register/register.css);

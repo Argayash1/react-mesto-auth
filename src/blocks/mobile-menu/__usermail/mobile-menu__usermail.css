@@ -1,0 +1,14 @@
+.mobile-menu__usermail {
+  max-width: 300px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  visibility: hidden;
+}
+
+@media screen and (max-width: 500px) {
+  .mobile-menu__usermail {
+    visibility: visible;
+  }
+}

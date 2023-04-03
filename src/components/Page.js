@@ -1,7 +1,7 @@
 import Main from "../components/Main.js";
 import Footer from "../components/Footer.js";
 
-function Page({ isLoading, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards }) {
+function Page({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards }) {
   return (
     <>
       <Main

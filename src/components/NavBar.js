@@ -1,5 +1,6 @@
 import { Routes, Route, NavLink } from "react-router-dom";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import Menu from "./Menu.js";
+import MobileMenu from "./MobileMenu.js";
 
 function Navbar({ loggedIn, onSignOut, userEmail, isOpen, onMobileMenu, onClose, isLoading }) {
   return (
@@ -11,14 +12,14 @@ function Navbar({ loggedIn, onSignOut, userEmail, isOpen, onMobileMenu, onClose,
               path="/"
               element={
                 <li className="navbar__navlist-item">
-                  <div className={`navbar__navlist-elements ${isOpen && "navbar__navlist-elements_is-active"}`}>
-                    <span className="navbar__usermail">{userEmail}</span>
-                    <button onClick={onSignOut} className="navbar__button">
-                      Выйти
-                    </button>
-                  </div>
-                  {!isOpen && <AiOutlineMenu className="navbar__navlist-button" size="30" onClick={onMobileMenu} />}
-                  {isOpen && <AiOutlineClose className="navbar__navlist-button" size="30" onClick={onClose} />}
+                  <Menu onSignOut={onSignOut} userEmail={userEmail} />
+                  <MobileMenu
+                    onSignOut={onSignOut}
+                    userEmail={userEmail}
+                    isOpen={isOpen}
+                    onMobileMenu={onMobileMenu}
+                    onClose={onClose}
+                  />
                 </li>
               }
             />

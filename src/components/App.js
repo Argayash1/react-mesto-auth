@@ -308,7 +308,6 @@ function App() {
                     <ProtectedRouteElement
                       element={Page}
                       loggedIn={loggedIn}
-                      isLoading={loading}
                       onEditProfile={handleEditProfileClick}
                       onAddPlace={handleAddPlaceClick}
                       onEditAvatar={handleEditAvatarClick}
