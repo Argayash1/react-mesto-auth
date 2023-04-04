@@ -176,7 +176,7 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
-    setIsLoading(setIsEditProfilePopupLoading, true);
+    setIsEditProfilePopupLoading(true);
     api
       .editProfile({ name, about })
       .then((userData) => {
@@ -188,13 +188,13 @@ function App() {
       })
       .finally(() => {
         setTimeout(() => {
-          setIsLoading(setIsEditProfilePopupLoading, false);
+          setIsEditProfilePopupLoading(false);
         }, 1500);
       });
   }
 
   function handleUpdateAvatar({ avatar }) {
-    setIsLoading(setIsEditAvatarPopupLoading, true);
+    setIsEditAvatarPopupLoading(true);
     api
       .addNewAvatar({ avatar })
       .then((userData) => {
@@ -206,13 +206,13 @@ function App() {
       })
       .finally(() => {
         setTimeout(() => {
-          setIsLoading(setIsEditAvatarPopupLoading, false);
+          setIsEditAvatarPopupLoading(false);
         }, 1500);
       });
   }
 
   function handleAddPlaceSubmit({ name, link }) {
-    setIsLoading(setIsAddPlacePopupLoading, true);
+    setIsAddPlacePopupLoading(true);
     api
       .addNewCard({ name, link })
       .then((newCard) => {
@@ -224,13 +224,13 @@ function App() {
       })
       .finally(() => {
         setTimeout(() => {
-          setIsLoading(setIsAddPlacePopupLoading, false);
+          setIsAddPlacePopupLoading(false);
         }, 1500);
       });
   }
 
   function handleCardDelete(card) {
-    setIsLoading(setIsDeletePopupLoading, true);
+    setIsDeletePopupLoading(true);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
       .deleteCard(card._id)
@@ -243,13 +243,9 @@ function App() {
       })
       .finally(() => {
         setTimeout(() => {
-          setIsLoading(setIsDeletePopupLoading, false);
+          setIsDeletePopupLoading(false);
         }, 1500);
       });
-  }
-
-  function setIsLoading(setIsPopupLoading, isPopupLoading) {
-    setIsPopupLoading(isPopupLoading);
   }
 
   function handleEditAvatarClick() {
