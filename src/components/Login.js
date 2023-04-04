@@ -1,15 +1,21 @@
 // import { useEffect } from "react";
-import useValidation from "../hooks/useValidation.js";
+import { useEffect } from "react";
+import useValidation from "../hooks/useForm.js";
 
 function Login({ name, onLogin, isLoading }) {
   const { values, errors, formValid, onChange, resetValidation } = useValidation();
   const submitButtonDisable = (isLoading || !formValid) && true;
   const submitButtonClassName = `login__submit-button ${!formValid && "login__submit-button_disabled"}`;
 
+  useEffect(() => {
+    if (!isLoading) {
+      resetValidation();
+    }
+  }, [isLoading, resetValidation]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(values);
-    resetValidation();
   };
 
   return (
@@ -20,19 +26,19 @@ function Login({ name, onLogin, isLoading }) {
           type="email"
           value={values.email || ""}
           onChange={onChange}
-          className="login__input"
+          className={`login__input ${errors.email && "login__input_type_error"}`}
           name="email"
           id="email"
           placeholder="Email"
           autoComplete="off"
           required
         />
-        <span className="login__error">{errors.email}</span>
+        <span className={`login__error ${errors.email && "login__error_visible"}`}>{errors.email}</span>
         <input
           type="password"
           value={values.password || ""}
           onChange={onChange}
-          className="login__input"
+          className={`login__input ${errors.password && "login__input_type_error"}`}
           name="password"
           id="password"
           placeholder="Пароль"
@@ -40,7 +46,7 @@ function Login({ name, onLogin, isLoading }) {
           minLength="8"
           required
         />
-        <span className="login__error">{errors.password}</span>
+        <span className={`login__error ${errors.password && "login__error_visible"}`}>{errors.password}</span>
         <button className={submitButtonClassName} type="submit" disabled={submitButtonDisable}>
           {isLoading ? "Вход..." : "Войти"}
         </button>

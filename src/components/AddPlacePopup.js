@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import useValidation from "../hooks/useValidation.js";
+import useForm from "../hooks/useForm.js";
 import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading, name }) {
-  const { values, errors, formValid, onChange, resetValidation } = useValidation();
+  const { values, errors, formValid, onChange, resetValidation } = useForm();
 
   useEffect(() => {
     resetValidation();

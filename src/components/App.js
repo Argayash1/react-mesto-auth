@@ -106,7 +106,6 @@ function App() {
     return auth
       .register(password, email)
       .then((res) => {
-        // console.log(res);
         setIsRegisterSuccess(true);
         setIsInfoTooltipOpen(true);
         navigate("/sign-in", { replace: true });

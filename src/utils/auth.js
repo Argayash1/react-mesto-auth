@@ -4,9 +4,8 @@ export const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return res.text().then((err) => {
-    const error = JSON.parse(err);
-    return Promise.reject(`Ошибка ${res.status}: ${error.message || error.error}`);
+  return res.json().then((err) => {
+    return Promise.reject(`Ошибка ${res.status}: ${err.message || err.error}`);
   });
 };
 

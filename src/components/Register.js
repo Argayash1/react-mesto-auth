@@ -1,10 +1,17 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import useValidation from "../hooks/useValidation.js";
+import useValidation from "../hooks/useForm.js";
 
 const Register = ({ name, onRegister, isLoading }) => {
-  const { values, errors, formValid, onChange } = useValidation();
+  const { values, errors, formValid, onChange, resetValidation } = useValidation();
   const submitButtonDisable = (isLoading || !formValid) && true;
   const submitButtonClassName = `register__submit-button ${!formValid && "register__submit-button_disabled"}`;
+
+  useEffect(() => {
+    if (!isLoading) {
+      resetValidation();
+    }
+  }, [isLoading, resetValidation]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,19 +26,19 @@ const Register = ({ name, onRegister, isLoading }) => {
           type="email"
           value={values.email || ""}
           onChange={onChange}
-          className="register__input"
+          className={`register__input ${errors.email && "register__input_type_error"}`}
           name="email"
           id="email"
           placeholder="Email"
           autoComplete="off"
           required
         />
-        <span className="register__error">{errors.email}</span>
+        <span className={`register__error ${errors.email && "register__error_visible"}`}>{errors.email}</span>
         <input
           type="password"
           value={values.password || ""}
           onChange={onChange}
-          className="register__input"
+          className={`register__input ${errors.password && "register__input_type_error"}`}
           name="password"
           id="password"
           placeholder="Пароль"
@@ -39,7 +46,7 @@ const Register = ({ name, onRegister, isLoading }) => {
           minLength="8"
           required
         />
-        <span className="register__error">{errors.password}</span>
+        <span className={`register__error ${errors.password && "register__error_visible"}`}>{errors.password}</span>
         <button className={submitButtonClassName} type="submit" disabled={submitButtonDisable}>
           {isLoading ? "Регистрация..." : "Зарегистрироваться"}
         </button>

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-function useValidation() {
+function useForm() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [formValid, setFormValid] = useState(false);
@@ -22,4 +22,4 @@ function useValidation() {
   return { values, errors, formValid, onChange, resetValidation };
 }
 
-export default useValidation;
+export default useForm;
