@@ -7,6 +7,10 @@ function Login({ name, onLogin, isLoading }) {
   const submitButtonDisable = (isLoading || !formValid) && true;
   const submitButtonClassName = `login__submit-button ${!formValid && "login__submit-button_disabled"}`;
 
+  // Спасибо Вам большое за замечание про кнопку - с удовольствием с ней поработал! Единственное, что -
+  // не понимаю, почему этот код работает только внутри хука useEffect7 Пробовал помещать его в функцию
+  // handleSubmit, но тогда класс к кнопке добавляется сразу после нажатия на неё, при этом текст меняется
+  // так, как надо. Буду очень Вам благодарен, если чуть-чуть поясните этот момент :)
   useEffect(() => {
     if (!isLoading) {
       resetValidation();
