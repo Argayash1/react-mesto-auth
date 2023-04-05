@@ -1,17 +1,10 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import useValidation from "../hooks/useForm.js";
+import useForm from "../hooks/useForm.js";
 
 const Register = ({ name, onRegister, isLoading }) => {
-  const { values, errors, formValid, onChange, resetValidation } = useValidation();
-  const submitButtonDisable = (isLoading || !formValid) && true;
+  const { values, errors, formValid, onChange } = useForm();
+  const submitButtonDisable = isLoading || !formValid;
   const submitButtonClassName = `register__submit-button ${!formValid && "register__submit-button_disabled"}`;
-
-  useEffect(() => {
-    if (!isLoading) {
-      resetValidation();
-    }
-  }, [isLoading, resetValidation]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
